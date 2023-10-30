@@ -125,9 +125,7 @@
           let summary = element.summary;
           elementsList.innerHTML += `<li class="list-group-item">
             <div onclick="loadElement(${key})">
-              <div class="">
-                <div class="d">${key + 1} ${symbol}</div>
-              </div>
+                <div class="fw-bold">${key + 1} ${symbol}</div>
             </div>
             </li>`;
         });
@@ -136,6 +134,9 @@
       loadElements();
 
       async function loadElement(id) {
+        for (const li of document.querySelectorAll("li.active")) {
+          li.classList.remove("active");
+        }
         const response = await fetch("PeriodicTable.json");
         const elements = await response.json();
         let element = elements.elements[id];
@@ -172,6 +173,8 @@
         let summary = element.summary;
         document.getElementById("summary").innerText = summary;
         document.getElementById("atomic_number").innerText = "Atomic Number - " + (id + 1 );
+        
+        document.getElementById(id).classList.add("active");
       }
     </script>
   </body>
