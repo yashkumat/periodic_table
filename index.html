@@ -54,7 +54,7 @@
       </div>
       <div class="row g-2 align-items-center">
         <div class="col-3 navbar-nav-scroll">
-          <ul class="list-group" data-bs-spy="scroll" id="elementsList"></ul>
+          <ul class="list-group" id="elementsList"></ul>
         </div>
         <div class="col-9 navbar-nav-scroll">
           <div class="card">
@@ -123,9 +123,9 @@
           let period = element.period;
           let symbol = element.symbol;
           let summary = element.summary;
-          elementsList.innerHTML += `<li class="list-group-item">
+          elementsList.innerHTML += `<li class="list-group-item" id="${key}">
             <div onclick="loadElement(${key})">
-                <div class="fw-bold">${key + 1} ${symbol}</div>
+                <div class="fw-bold list-menu">${key + 1} ${symbol}</div>
             </div>
             </li>`;
         });
