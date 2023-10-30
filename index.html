@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
+    <title>Periodic Table</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Schoolbell&v1"
+      rel="stylesheet" />
+
+    <meta
+      name="description"
+      content="Explore the periodic table with our interactive app! Click on any element to access detailed information, including properties, atomic structure, and more. A user-friendly guide to understanding the elements of the periodic table." />
+
+    <style>
+      body {
+        background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmYWZhIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjBmMGYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g");
+        background: -moz-linear-gradient(0deg, #fffafa 1px, #f0f0f0 1px);
+        background: -webkit-linear-gradient(0deg, #fffafa 1px, #f0f0f0 1px);
+        background: linear-gradient(90deg, #fffafa 1px, #f0f0f0 1px);
+        -moz-background-size: 5px 5px;
+        -o-background-size: 5px 5px;
+        -webkit-background-size: 5px 5px;
+        background-size: 5px 5px;
+        font-family: "Schoolbell", arial, serif;
+        font-size: smaller;
+        letter-spacing: 0.1rem;
+      }
+
+      .navbar-nav-scroll {
+        max-height: 92.5vh !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid my-2">
+      <div class="text-center text-small fw-bold my-2">
+        Periodic Table By Pavitra Classes
+      </div>
+      <div class="row g-2 align-items-center">
+        <div class="col-3 navbar-nav-scroll">
+          <ul class="list-group" data-bs-spy="scroll" id="elementsList"></ul>
+        </div>
+        <div class="col-9 navbar-nav-scroll">
+          <div class="card">
+            <img
+              src="https://storage.googleapis.com/search-ar-edu/periodic-table/element_001_hydrogen/element_001_hydrogen_srp_th.png"
+              class="card-img-top"
+              id="image"
+              alt="Hydrogen" />
+            <div class="card-body">
+              <h5 class="card-title" id="name">Hydrogen (H)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="atomic_number">
+                Atomic Number - 1
+              </li>
+              <li class="list-group-item" id="atomic_mass">
+                Atomic Mass - 1.008
+              </li>
+              <li class="list-group-item" id="period">Period - 1</li>
+
+              <li class="list-group-item" id="group">Group - 1</li>
+              <li class="list-group-item" id="block">Block - s</li>
+              <li class="list-group-item" id="electron_configuration">
+                Electron Configuration - 1s1
+              </li>
+              <li class="list-group-item" id="category">
+                Category - diatomic nonmetal
+              </li>
+            </ul>
+
+            <div class="card-body">
+              <p class="card-text" id="summary">
+                Hydrogen is a chemical element with chemical symbol H and atomic
+                number 1. With an atomic weight of 1.00794 u, hydrogen is the
+                lightest element on the periodic table. Its monatomic form (H)
+                is the most abundant chemical substance in the Universe,
+                constituting roughly 75% of all baryonic mass.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+
+    <!-- <script src="script.js"></script> -->
+
+    <script>
+      async function loadElements() {
+        const response = await fetch("PeriodicTable.json");
+        const elements = await response.json();
+        var elementsList = document.getElementById("elementsList");
+
+        elements.elements.forEach((element, key) => {
+          let name = element.name;
+          let appearance = element.name;
+          let atomic_mass = element.name;
+          let block = element.block;
+          let bohr_model_image = element.bohr_model_image;
+          let category = element.category;
+          let density = element.density;
+          let electron_configuration = element.electron_configuration;
+          let group = element.group;
+          let period = element.period;
+          let symbol = element.symbol;
+          let summary = element.summary;
+          elementsList.innerHTML += `<li class="list-group-item">
+            <div onclick="loadElement(${key})">
+              <div class="">
+                <div class="d">${key + 1} ${symbol}</div>
+              </div>
+            </div>
+            </li>`;
+        });
+      }
+
+      loadElements();
+
+      async function loadElement(id) {
+        const response = await fetch("PeriodicTable.json");
+        const elements = await response.json();
+        let element = elements.elements[id];
+
+        let name = element.name;
+        let symbol = element.symbol;
+        document.getElementById("name").innerText = name + " (" + symbol + ")";
+
+        let atomic_mass = element.atomic_mass;
+        document.getElementById("atomic_mass").innerText =
+          "Atomic Mass - " + atomic_mass;
+
+        let block = element.block;
+        document.getElementById("block").innerText = "Block - " + block;
+
+        let bohr_model_image = element.bohr_model_image;
+        document.getElementById("image").src = bohr_model_image;
+        document.getElementById("image").setAttribute("alt", name);
+
+        let category = element.category;
+        document.getElementById("category").innerText =
+          "Category - " + category;
+
+        let electron_configuration = element.electron_configuration;
+        document.getElementById("electron_configuration").innerText =
+          "Electron Configuration - " + electron_configuration;
+
+        let group = element.group;
+        document.getElementById("group").innerText = "Group - " + group;
+
+        let period = element.period;
+        document.getElementById("period").innerText = "Period - " + period;
+        // let shells = element.shells;
+
+        let summary = element.summary;
+        document.getElementById("summary").innerText = summary;
+
+        console.log(name);
+      }
+    </script>
+  </body>
+</html>
